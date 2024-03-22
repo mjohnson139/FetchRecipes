@@ -14,6 +14,7 @@
 		55C8C8B82BADD21E00FE13FE /* FetchRecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8B72BADD21E00FE13FE /* FetchRecipesTests.swift */; };
 		55C8C8C22BADD21E00FE13FE /* FetchRecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8C12BADD21E00FE13FE /* FetchRecipesUITests.swift */; };
 		55C8C8C42BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8C32BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift */; };
+		55C8C8D22BADD4D700FE13FE /* INSTRUCTIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		55C8C8BD2BADD21E00FE13FE /* FetchRecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C8C8C12BADD21E00FE13FE /* FetchRecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITests.swift; sourceTree = "<group>"; };
 		55C8C8C32BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = INSTRUCTIONS.md; sourceTree = "<group>"; };
+		55C8C8D32BADD50D00FE13FE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 		55C8C8992BADD21C00FE13FE = {
 			isa = PBXGroup;
 			children = (
+				55C8C8D32BADD50D00FE13FE /* README.md */,
+				55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */,
 				55C8C8A42BADD21C00FE13FE /* FetchRecipes */,
 				55C8C8B62BADD21E00FE13FE /* FetchRecipesTests */,
 				55C8C8C02BADD21E00FE13FE /* FetchRecipesUITests */,
@@ -217,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 55C8C8992BADD21C00FE13FE;
+			packageReferences = (
+				55C8C8D02BADD3F000FE13FE /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 55C8C8A32BADD21C00FE13FE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C8C8D22BADD4D700FE13FE /* INSTRUCTIONS.md in Resources */,
 				55C8C8AE2BADD21E00FE13FE /* Preview Assets.xcassets in Resources */,
 				55C8C8AA2BADD21E00FE13FE /* Assets.xcassets in Resources */,
 			);
@@ -609,6 +618,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55C8C8D02BADD3F000FE13FE /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 55C8C89A2BADD21C00FE13FE /* Project object */;
 }

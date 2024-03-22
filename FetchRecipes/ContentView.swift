@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  FetchRecipes
-//
-//  Created by Matthew Johnson on 3/22/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
