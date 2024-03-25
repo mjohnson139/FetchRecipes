@@ -1,10 +1,11 @@
 import SwiftUI
+import SwiftUINavigation
 
 struct RecipeListView: View {
   @ObservedObject var model: RecipeListModel
 
   let columns = [
-      GridItem(.adaptive(minimum: 150))
+    GridItem(.adaptive(minimum: 150)),
   ]
 
   var body: some View {
@@ -12,12 +13,26 @@ struct RecipeListView: View {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 20) {
           ForEach(model.recipes) { meal in
-            MealCardView(meal: meal)
+            Button(action: {
+              model.mealTapped(meal: meal)
+            }
+            ) {
+              MealCardView(meal: meal)
+            }
           }
         }
         .padding()
       }
       .navigationTitle(model.listName)
+      .sheet(
+        unwrapping: $model.destination,
+        case: /RecipeListModel.Destination.detail
+      ) { $meal in
+        NavigationStack {
+          Text(meal.strMeal)
+            .navigationTitle(meal.strMeal)
+        }
+      }
     }
   }
 }
@@ -47,9 +62,8 @@ struct MealCardView: View {
 
 #Preview("Portrait") {
   RecipeListView(model: .mock(numberOfMeals: 5))
-  
 }
+
 #Preview("Landscape", traits: .landscapeLeft) {
-  RecipeListView(model: .mock(numberOfMeals: 100) )
-  
+  RecipeListView(model: .mock(numberOfMeals: 100))
 }
