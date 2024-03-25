@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RecipeList: View {
+struct RecipeListView: View {
   var body: some View {
     NavigationStack {
       List {}
@@ -10,5 +10,5 @@ struct RecipeList: View {
 }
 
 #Preview {
-  RecipeList()
+  RecipeListView()
 }
