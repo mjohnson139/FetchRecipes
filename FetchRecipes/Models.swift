@@ -8,7 +8,9 @@ struct Meal: Equatable, Identifiable {
   let id: String
   let strMeal: String
   let strInstructions: String
+  let strMealThumb: URL
   let ingredients: [String: String]
+
 }
 
 
@@ -18,7 +20,7 @@ extension Meal: Decodable {
     id = try container.decode(String.self, forKey: .id)
     strMeal = try container.decode(String.self, forKey: .strMeal)
     strInstructions = try container.decode(String.self, forKey: .strInstructions)
-
+    strMealThumb = try container.decode(URL.self, forKey: .strMealThumb)
     var ingredientsDict: [String: String] = [:]
     for i in 1 ... 20 {
       let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")!
@@ -34,7 +36,10 @@ extension Meal: Decodable {
   }
 
   private enum CodingKeys: String, CodingKey {
-    case id = "idMeal", strMeal, strInstructions
+    case id = "idMeal"
+    case strMeal
+    case strMealThumb
+    case strInstructions
     case strIngredient1, strMeasure1
     case strIngredient2, strMeasure2
     case strIngredient3, strMeasure3
