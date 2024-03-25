@@ -15,6 +15,7 @@
 		55C8C8C22BADD21E00FE13FE /* FetchRecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8C12BADD21E00FE13FE /* FetchRecipesUITests.swift */; };
 		55C8C8C42BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8C32BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift */; };
 		55C8C8D22BADD4D700FE13FE /* INSTRUCTIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */; };
+		55D951412BB1C1D40095321B /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951402BB1C1D40095321B /* RecipeList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		55C8C8C32BADD21E00FE13FE /* FetchRecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = INSTRUCTIONS.md; sourceTree = "<group>"; };
 		55C8C8D32BADD50D00FE13FE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		55D951402BB1C1D40095321B /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				55C8C8B62BADD21E00FE13FE /* FetchRecipesTests */,
 				55C8C8C02BADD21E00FE13FE /* FetchRecipesUITests */,
 				55C8C8A32BADD21C00FE13FE /* Products */,
+				55C8C8D72BAE253C00FE13FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				55C8C8A52BADD21C00FE13FE /* FetchRecipesApp.swift */,
+				55D951402BB1C1D40095321B /* RecipeList.swift */,
 				55C8C8A72BADD21C00FE13FE /* ContentView.swift */,
 				55C8C8A92BADD21E00FE13FE /* Assets.xcassets */,
 				55C8C8AB2BADD21E00FE13FE /* FetchRecipes.entitlements */,
@@ -134,6 +138,13 @@
 			path = FetchRecipesUITests;
 			sourceTree = "<group>";
 		};
+		55C8C8D72BAE253C00FE13FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +161,8 @@
 			dependencies = (
 			);
 			name = FetchRecipes;
+			packageProductDependencies = (
+			);
 			productName = FetchRecipes;
 			productReference = 55C8C8A22BADD21C00FE13FE /* FetchRecipes.app */;
 			productType = "com.apple.product-type.application";
@@ -223,7 +236,6 @@
 			);
 			mainGroup = 55C8C8992BADD21C00FE13FE;
 			packageReferences = (
-				55C8C8D02BADD3F000FE13FE /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 55C8C8A32BADD21C00FE13FE /* Products */;
 			projectDirPath = "";
@@ -269,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C8C8A82BADD21C00FE13FE /* ContentView.swift in Sources */,
+				55D951412BB1C1D40095321B /* RecipeList.swift in Sources */,
 				55C8C8A62BADD21C00FE13FE /* FetchRecipesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +464,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,6 +501,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -618,17 +633,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		55C8C8D02BADD3F000FE13FE /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 55C8C89A2BADD21C00FE13FE /* Project object */;
 }
