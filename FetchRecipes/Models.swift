@@ -4,33 +4,18 @@ struct RecipeList: Equatable, Decodable {
   let meals: [Meal]
 }
 
-struct Meal: Equatable {
-  let idMeal: String
+struct Meal: Equatable, Identifiable {
+  let id: String
   let strMeal: String
   let strInstructions: String
   let ingredients: [String: String]
 }
 
-#if DEBUG
-  extension Meal {
-    static let mock = Self(
-      idMeal: "1111",
-      strMeal: "Test Meal",
-      strInstructions: "Mock Instructions",
-      ingredients: ["First Ingrediant": "test"]
-    )
-  }
-
-#endif
-
-extension Meal: Identifiable {
-  var id: String { idMeal }
-}
 
 extension Meal: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    idMeal = try container.decode(String.self, forKey: .idMeal)
+    id = try container.decode(String.self, forKey: .id)
     strMeal = try container.decode(String.self, forKey: .strMeal)
     strInstructions = try container.decode(String.self, forKey: .strInstructions)
 
@@ -49,7 +34,7 @@ extension Meal: Decodable {
   }
 
   private enum CodingKeys: String, CodingKey {
-    case idMeal, strMeal, strInstructions
+    case id = "idMeal", strMeal, strInstructions
     case strIngredient1, strMeasure1
     case strIngredient2, strMeasure2
     case strIngredient3, strMeasure3
