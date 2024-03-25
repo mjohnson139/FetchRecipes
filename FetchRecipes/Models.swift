@@ -1,9 +1,5 @@
 import Foundation
 
-struct RecipeList: Equatable, Decodable {
-  let meals: [Meal]
-}
-
 struct Meal: Equatable, Identifiable {
   let id: String
   let strMeal: String

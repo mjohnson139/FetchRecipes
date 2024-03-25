@@ -2,14 +2,12 @@ import Foundation
 
 #if DEBUG
 
-  extension RecipeList {
-    static let mock = Self(meals: [.mock])
-
-    static func mock(numberOfMeals: Int) -> Self {
+  extension RecipeListModel {
+    static func mock(numberOfMeals: Int) -> RecipeListModel {
       let meals = (1 ... numberOfMeals).map {
         Meal.createMock(id: "\($0)")
       }
-      return Self(meals: meals)
+      return RecipeListModel(listName: "Mock List", recipes: meals)
     }
   }
 
