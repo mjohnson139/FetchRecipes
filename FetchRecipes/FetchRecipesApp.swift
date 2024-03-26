@@ -5,7 +5,7 @@ struct FetchRecipesApp: App {
   
   var body: some Scene {
     WindowGroup {
-      RecipeListView(model: .mock(numberOfMeals: 100))
+      RecipeListView(model: RecipeListModel(listName: "Test"))
     }
   }
 }

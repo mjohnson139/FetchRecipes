@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		55C0B7082BB2300D00741973 /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107822BB21ABB008A6345 /* MealCardView.swift */; };
 		55C0B7092BB2301100741973 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107842BB21B7E008A6345 /* MealDetailView.swift */; };
+		55C0B70B2BB332EE00741973 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C0B70A2BB332EE00741973 /* ApiClient.swift */; };
+		55C0B70E2BB33F7500741973 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 55C0B70D2BB33F7500741973 /* Dependencies */; };
+		55C0B7102BB33F7500741973 /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 55C0B70F2BB33F7500741973 /* DependenciesMacros */; };
 		55C8C8A62BADD21C00FE13FE /* FetchRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8A52BADD21C00FE13FE /* FetchRecipesApp.swift */; };
 		55C8C8AA2BADD21E00FE13FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8A92BADD21E00FE13FE /* Assets.xcassets */; };
 		55C8C8D22BADD4D700FE13FE /* INSTRUCTIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */; };
@@ -37,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55C0B70A2BB332EE00741973 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		55C8C8A22BADD21C00FE13FE /* FetchRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C8C8A52BADD21C00FE13FE /* FetchRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesApp.swift; sourceTree = "<group>"; };
 		55C8C8A92BADD21E00FE13FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				55F107802BB210AA008A6345 /* SwiftUINavigation in Frameworks */,
+				55C0B70E2BB33F7500741973 /* Dependencies in Frameworks */,
+				55C0B7102BB33F7500741973 /* DependenciesMacros in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,13 +103,14 @@
 		55C8C8A42BADD21C00FE13FE /* FetchRecipes */ = {
 			isa = PBXGroup;
 			children = (
-				55F107812BB21A93008A6345 /* Views */,
+				55C0B70A2BB332EE00741973 /* ApiClient.swift */,
 				55C8C8A92BADD21E00FE13FE /* Assets.xcassets */,
 				55C8C8AB2BADD21E00FE13FE /* FetchRecipes.entitlements */,
 				55C8C8A52BADD21C00FE13FE /* FetchRecipesApp.swift */,
 				55D951472BB1E70C0095321B /* Mocks.swift */,
 				55D951422BB1C39C0095321B /* Models.swift */,
 				55D9514A2BB208630095321B /* ViewModels.swift */,
+				55F107812BB21A93008A6345 /* Views */,
 			);
 			path = FetchRecipes;
 			sourceTree = "<group>";
@@ -159,6 +166,8 @@
 			name = FetchRecipes;
 			packageProductDependencies = (
 				55F1077F2BB210AA008A6345 /* SwiftUINavigation */,
+				55C0B70D2BB33F7500741973 /* Dependencies */,
+				55C0B70F2BB33F7500741973 /* DependenciesMacros */,
 			);
 			productName = FetchRecipes;
 			productReference = 55C8C8A22BADD21C00FE13FE /* FetchRecipes.app */;
@@ -212,6 +221,7 @@
 			mainGroup = 55C8C8992BADD21C00FE13FE;
 			packageReferences = (
 				55F1077E2BB21091008A6345 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+				55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 			);
 			productRefGroup = 55C8C8A32BADD21C00FE13FE /* Products */;
 			projectDirPath = "";
@@ -250,6 +260,7 @@
 				55D951412BB1C1D40095321B /* RecipeListView.swift in Sources */,
 				55F107832BB21ABB008A6345 /* MealCardView.swift in Sources */,
 				55C8C8A62BADD21C00FE13FE /* FetchRecipesApp.swift in Sources */,
+				55C0B70B2BB332EE00741973 /* ApiClient.swift in Sources */,
 				55D9514B2BB208630095321B /* ViewModels.swift in Sources */,
 				55F107852BB21B7E008A6345 /* MealDetailView.swift in Sources */,
 				55D951432BB1C39C0095321B /* Models.swift in Sources */,
@@ -547,6 +558,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
 		55F1077E2BB21091008A6345 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation";
@@ -558,6 +577,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		55C0B70D2BB33F7500741973 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		55C0B70F2BB33F7500741973 /* DependenciesMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesMacros;
+		};
 		55F1077F2BB210AA008A6345 /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55F1077E2BB21091008A6345 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;

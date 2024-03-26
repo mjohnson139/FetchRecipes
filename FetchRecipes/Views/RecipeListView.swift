@@ -10,35 +10,51 @@ struct RecipeListView: View {
 
   var body: some View {
     NavigationStack {
-      ScrollView {
-        LazyVGrid(columns: columns, spacing: 20) {
-          ForEach(model.recipes) { meal in
-            Button(action: {
-              model.mealTapped(meal: meal)
-            }
-            ) {
-              MealCardView(meal: meal)
+      // Check if the mealList is nil and show ProgressView if true
+      if let recipes = model.recipes {
+        // Existing code for ScrollView
+        ScrollView {
+          LazyVGrid(columns: columns, spacing: 20) {
+            ForEach(recipes) { meal in
+              Button(action: {
+                model.mealTapped(meal: meal)
+              }) {
+                MealCardView(meal: meal)
+              }
             }
           }
+          .padding()
         }
-        .padding()
+        .navigationTitle(model.listName)
+        .navigationDestination(
+          unwrapping: $model.destination,
+          case: /RecipeListModel.Destination.detail
+        ) { $meal in
+          NavigationStack {
+            MealDetailView(meal: meal)
+              .navigationTitle(meal.strMeal)
+          }
+        }
+      } else {
+        ProgressView()
+          .progressViewStyle(CircularProgressViewStyle())
+          .navigationTitle(model.listName)
       }
-      .navigationTitle(model.listName)
-      .navigationDestination(
-        unwrapping: $model.destination,
-        case: /RecipeListModel.Destination.detail
-      ) { $meal in
-        NavigationStack {
-          MealDetailView(meal: meal)
-            .navigationTitle(meal.strMeal)
+    }
+    .onAppear {
+      // Call the API to load data if not already loaded
+      Task {
+        if model.recipes == nil {
+          await model.loadData()
         }
       }
     }
   }
 }
 
-
-
+#Preview("Loading") {
+  RecipeListView(model: .init(listName: "Loading List"))
+}
 
 #Preview("Portrait") {
   RecipeListView(model: .mock(numberOfMeals: 5))

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Meal: Equatable, Identifiable {
+struct Meal: Equatable, Identifiable, Sendable {
   let id: String
   let strMeal: String
   let strInstructions: String
