@@ -4,8 +4,8 @@ import SwiftUI
 
 class RecipeListModel: ObservableObject {
   @Published var destination: Destination?
-  let listName: String
   @Published var recipes: [Meal]
+  let listName: String
   
   enum Destination {
     case detail(Meal)
