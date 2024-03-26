@@ -29,7 +29,7 @@ struct RecipeListView: View {
         case: /RecipeListModel.Destination.detail
       ) { $meal in
         NavigationStack {
-          Text(meal.strMeal)
+          MealDetailView(meal: meal)
             .navigationTitle(meal.strMeal)
         }
       }

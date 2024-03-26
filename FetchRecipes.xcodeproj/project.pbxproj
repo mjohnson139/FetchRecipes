@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55C0B7082BB2300D00741973 /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107822BB21ABB008A6345 /* MealCardView.swift */; };
+		55C0B7092BB2301100741973 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107842BB21B7E008A6345 /* MealDetailView.swift */; };
 		55C8C8A62BADD21C00FE13FE /* FetchRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8C8A52BADD21C00FE13FE /* FetchRecipesApp.swift */; };
 		55C8C8AA2BADD21E00FE13FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8A92BADD21E00FE13FE /* Assets.xcassets */; };
 		55C8C8D22BADD4D700FE13FE /* INSTRUCTIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 55C8C8D12BADD4D700FE13FE /* INSTRUCTIONS.md */; };
@@ -260,8 +262,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				55D951462BB1CB920095321B /* Models.swift in Sources */,
+				55C0B7082BB2300D00741973 /* MealCardView.swift in Sources */,
 				55D951452BB1CAA10095321B /* ModelsDecodingTests.swift in Sources */,
 				55D9514C2BB208950095321B /* ViewModels.swift in Sources */,
+				55C0B7092BB2301100741973 /* MealDetailView.swift in Sources */,
 				55D9514D2BB208D20095321B /* RecipeListView.swift in Sources */,
 				55D951492BB1E7100095321B /* Mocks.swift in Sources */,
 			);
