@@ -2,12 +2,12 @@ import Foundation
 
 #if DEBUG
 
-  extension RecipeListModel {
-    static func mock(numberOfMeals: Int) -> RecipeListModel {
+  extension MealListModel {
+    static func mock(numberOfMeals: Int) -> MealListModel {
       let meals = (1 ... numberOfMeals).map {
         Meal.createMock(id: "\($0)")
       }
-      return RecipeListModel(listName: "Mock List", recipes: meals)
+      return MealListModel(listName: "Mock List", recipes: meals)
     }
   }
 
@@ -33,4 +33,17 @@ import Foundation
     }
   }
 
+
+extension ApiClient {
+  static let mock = Self.init {
+    return [.mock]
+  } getMealById: { _ in
+    return .mock
+  }
+  static let mockFailing = Self.init {
+    throw ApiError.dataLoadError
+  } getMealById: { _ in
+    throw ApiError.dataLoadError
+  }
+}
 #endif

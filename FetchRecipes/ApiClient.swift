@@ -19,21 +19,9 @@ struct ApiClient: Sendable {
 }
 
 extension ApiClient {
-  static let mock = Self.init {
-    // Simulate network delay
-    try await Task.sleep(nanoseconds: 2_000_000_000)
-    return [.mock]
-  } getMealById: { _ in
-    // Simulate network delay
-    try await Task.sleep(nanoseconds: 2_000_000_000)
-    return .mock
-  }
-}
-
-extension ApiClient {
   static let live = Self.init {
     let model = try await requestModel(url: URL(string: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert")!)
-    return model.meals
+    return model.meals.sorted { $0.strMeal < $1.strMeal }
 
   } getMealById: { id in
     let model = try await requestModel(url: URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(id)")!)

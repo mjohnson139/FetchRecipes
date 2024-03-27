@@ -3,7 +3,7 @@ import Foundation
 import SwiftUI
 import SwiftUINavigation
 
-final class RecipeListModel: ObservableObject {
+final class MealListModel: ObservableObject {
   @Dependency(\.apiClient.getList) var getList
   @Dependency(\.apiClient.getMealById) var getMealById
 
@@ -17,16 +17,23 @@ final class RecipeListModel: ObservableObject {
     case detail(Meal)
   }
 
-  init(destination: Destination? = nil, listName: String = "Recipe List", recipes: [Meal]? = nil) {
+  init(
+    destination: Destination? = nil,
+    listName: String = "Recipe List",
+    recipes: [Meal]? = nil,
+    errorMessage: String? = nil
+  ) {
+    self.destination = destination
     self.listName = listName
     self.recipes = recipes
+    self.errorMessage = errorMessage
   }
 
   @MainActor
   func mealTapped(meal: Meal) async {
-    await loadMeal(id:meal.id)
+    await loadMeal(id: meal.id)
   }
-  
+
   @MainActor
   func loadList() async {
     do {
@@ -47,6 +54,4 @@ final class RecipeListModel: ObservableObject {
       errorMessage = error.localizedDescription
     }
   }
-
-
 }

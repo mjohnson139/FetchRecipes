@@ -1,8 +1,8 @@
 import SwiftUI
 import SwiftUINavigation
 
-struct RecipeListView: View {
-  @ObservedObject var model: RecipeListModel
+struct MealListView: View {
+  @ObservedObject var model: MealListModel
 
   let columns = [
     GridItem(.adaptive(minimum: 150)),
@@ -30,13 +30,22 @@ struct RecipeListView: View {
         .navigationTitle(model.listName)
         .navigationDestination(
           unwrapping: $model.destination,
-          case: /RecipeListModel.Destination.detail
+          case: /MealListModel.Destination.detail
         ) { $meal in
           NavigationStack {
             MealDetailView(meal: meal)
               .navigationTitle(meal.strMeal)
           }
         }
+        .alert(
+          title: { Text($0)},
+          unwrapping: $model.errorMessage,
+          actions: {_ in
+            Button("Ok", role: .cancel) {
+              self.model.errorMessage = nil
+            }
+          },
+          message:  { Text($0) })
       } else {
         ProgressView()
           .progressViewStyle(CircularProgressViewStyle())
@@ -55,13 +64,17 @@ struct RecipeListView: View {
 }
 
 #Preview("Loading") {
-  RecipeListView(model: .init(listName: "Loading List"))
+  MealListView(model: .init(listName: "Loading List"))
 }
 
 #Preview("Portrait") {
-  RecipeListView(model: .mock(numberOfMeals: 5))
+  MealListView(model: .mock(numberOfMeals: 5))
 }
 
 #Preview("Landscape", traits: .landscapeLeft) {
-  RecipeListView(model: .mock(numberOfMeals: 100))
+  MealListView(model: .mock(numberOfMeals: 100))
+}
+
+#Preview("Error Message", traits: .portrait) {
+  MealListView(model: .init(errorMessage: "This is a fake error message"))
 }
