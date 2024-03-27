@@ -18,32 +18,32 @@ import Foundation
       strInstructions: "Mock Instructions",
       strMealThumb: URL(string: "https://www.themealdb.com/images/media/meals/uttuxy1511382180.jpg")!,
       ingredients: [
-        "Milk": "1/2 Cup",
-        "Egg": "1",
-        "Flour": "2 1/2 Cup",
-        "Butter": "8 Tblsp",
-        "Sugar": "1/2 Cup",
+        .init(measurement: "1/2 Cup", ingredient: "Milk"),
+        .init(measurement: "1", ingredient: "Egg"),
+        .init(measurement: "2 1/2 Cups", ingredient: "Flour"),
+        .init(measurement: "8 Tblsps", ingredient: "Butter"),
+        .init(measurement: "1/2 Cup", ingredient: "Sugar"),
       ]
     )
 
     static func createMock(id: String) -> Self {
       Self(id: id, strMeal: "Meal \(id)", strInstructions: "Instructions for meal \(id)",
            strMealThumb: URL(string: "https://www.themealdb.com/images/media/meals/uttuxy1511382180.jpg")!,
-           ingredients: ["First Ingredient for meal \(id)": "First Measurement for meal \(id)"])
+           ingredients: [.init(measurement: "First Measurement for meal \(id)", ingredient: "First Ingredient for meal \(id)")])
     }
   }
 
+  extension ApiClient {
+    static let mock = Self.init {
+      [.mock]
+    } getMealById: { _ in
+      .mock
+    }
 
-extension ApiClient {
-  static let mock = Self.init {
-    return [.mock]
-  } getMealById: { _ in
-    return .mock
+    static let mockFailing = Self.init {
+      throw ApiError.dataLoadError
+    } getMealById: { _ in
+      throw ApiError.dataLoadError
+    }
   }
-  static let mockFailing = Self.init {
-    throw ApiError.dataLoadError
-  } getMealById: { _ in
-    throw ApiError.dataLoadError
-  }
-}
 #endif

@@ -21,11 +21,12 @@ struct MealDetailView: View {
         if !meal.ingredients.isEmpty {
           let ingredients = meal.ingredients
           Section("Ingredients") {
-            ForEach(Array(ingredients), id: \.key) { key, value in
+            ForEach(ingredients.indices, id: \.self) { index in
+                let item = ingredients[index]
                 HStack {
-                    Text(value)
+                    Text(item.measurement)
                         .multilineTextAlignment(.leading)
-                    Text(key)
+                    Text(item.ingredient)
                         .multilineTextAlignment(.leading)
                 }
             }
