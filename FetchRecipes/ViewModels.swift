@@ -13,7 +13,7 @@ final class MealListModel: ObservableObject {
 
   let listName: String
 
-  enum Destination {
+  enum Destination: Equatable {
     case detail(Meal)
   }
 

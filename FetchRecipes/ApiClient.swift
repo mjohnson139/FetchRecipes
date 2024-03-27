@@ -3,12 +3,11 @@ import Foundation
 
 enum ApiError: LocalizedError {
   case dataLoadError
-  
-  /// A localized message describing what error occurred.
+
   var errorDescription: String {
     switch self {
     case .dataLoadError:
-      return "Could not load the data."
+      "Could not load the data."
     }
   }
 }
@@ -24,16 +23,20 @@ extension ApiClient {
     return model.meals.sorted { $0.strMeal < $1.strMeal }
 
   } getMealById: { id in
-    let model = try await requestModel(url: URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(id)")!)
+    guard let url = URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(id)") else {
+      throw (ApiError.dataLoadError)
+    }
+
+    let model = try await requestModel(url: url)
     return model.meals.first
   }
-  
+
   static func requestModel(url: URL) async throws -> Meals {
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse,
           httpResponse.statusCode == 200
     else {
-      throw(ApiError.dataLoadError)
+      throw (ApiError.dataLoadError)
     }
 
     let decoder = JSONDecoder()

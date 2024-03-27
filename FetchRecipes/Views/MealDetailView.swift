@@ -21,13 +21,13 @@ struct MealDetailView: View {
         if !meal.ingredients.isEmpty {
           let ingredients = meal.ingredients
           Section("Ingredients") {
-            ForEach(ingredients.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-              HStack {
-                Text(value)
-                  .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-                Text(key)
-                  .multilineTextAlignment(.leading)
-              }
+            ForEach(Array(ingredients), id: \.key) { key, value in
+                HStack {
+                    Text(value)
+                        .multilineTextAlignment(.leading)
+                    Text(key)
+                        .multilineTextAlignment(.leading)
+                }
             }
           }
         }
@@ -42,13 +42,12 @@ struct MealDetailView: View {
       .navigationTitle(meal.strMeal)
     }
   }
-  
 }
 
 #Preview {
   MealDetailView(meal: .mock)
 }
 
-#Preview { //Missing Instructions
+#Preview { // Missing Instructions
   MealDetailView(meal: Meal(id: "555", strMeal: "Missing Instructions", strInstructions: nil, strMealThumb: Meal.mock.strMealThumb, ingredients: Meal.mock.ingredients))
 }

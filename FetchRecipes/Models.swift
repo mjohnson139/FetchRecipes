@@ -10,7 +10,6 @@ struct Meal: Equatable, Identifiable, Sendable {
   let strInstructions: String?
   let strMealThumb: URL
   let ingredients: [String: String]
-
 }
 
 extension Meal: Decodable {
@@ -20,18 +19,18 @@ extension Meal: Decodable {
     strMeal = try container.decode(String.self, forKey: .strMeal)
     strInstructions = try container.decodeIfPresent(String.self, forKey: .strInstructions)
     strMealThumb = try container.decode(URL.self, forKey: .strMealThumb)
-    var ingredientsDict: [String: String] = [:]
-    for i in 1 ... 20 {
+
+    ingredients = (1 ... 20).reduce(into: [:]) { ingredientsDict, i in
       let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")!
       let measureKey = CodingKeys(stringValue: "strMeasure\(i)")!
-      if let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey),
-         let measure = try container.decodeIfPresent(String.self, forKey: measureKey),
+
+      if let ingredient = try? container.decodeIfPresent(String.self, forKey: ingredientKey),
+         let measure = try? container.decodeIfPresent(String.self, forKey: measureKey),
          !ingredient.isEmpty, !measure.isEmpty
       {
         ingredientsDict[ingredient] = measure
       }
     }
-    ingredients = ingredientsDict
   }
 
   private enum CodingKeys: String, CodingKey {
