@@ -6,28 +6,6 @@ import Foundation
 
 final class ModelsDecodingTests: XCTestCase {
   
-  struct Meals: Decodable {
-    let meals: [Meal]
-  }
-
-  struct Meal: Equatable, Identifiable, Decodable {
-    let id: String
-    let strMeal: String
-    let strMealThumb: URL
-    let strInstructions: String?
-    let ingredients: [String : String]?
-    
-    
-    private enum CodingKeys: String, CodingKey {
-      case id = "idMeal"
-      case strMeal
-      case strMealThumb
-      case strInstructions
-      case ingredients
-    }
-  }
-  
-  
   func testReadList() async throws {
     let (data, response) = try await URLSession.shared.data(from: URL(string: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert")!)
     if let httpResponse = response as? HTTPURLResponse,
