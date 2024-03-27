@@ -39,7 +39,6 @@ final class RecipeListModel: ObservableObject {
         destination = .detail(meal)
       }
     } catch {
-      recipes = []
       errorMessage = error.localizedDescription
     }
   }

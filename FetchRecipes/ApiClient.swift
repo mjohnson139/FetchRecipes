@@ -41,7 +41,6 @@ extension ApiClient {
   }
   
   static func requestModel(url: URL) async throws -> Meals {
-    // Return the list of desserts
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse,
           httpResponse.statusCode == 200

@@ -1,5 +1,6 @@
 import Foundation
 
+
 struct Meals: Decodable {
   let meals: [Meal]
 }
