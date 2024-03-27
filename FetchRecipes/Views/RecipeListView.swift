@@ -18,7 +18,7 @@ struct RecipeListView: View {
             ForEach(recipes) { meal in
               Button(action: {
                 Task {
-                  await model.loadMeal(id:meal.id)
+                  await model.mealTapped(meal:meal)
                 }
               }) {
                 MealCardView(meal: meal)

@@ -23,6 +23,11 @@ final class RecipeListModel: ObservableObject {
   }
 
   @MainActor
+  func mealTapped(meal: Meal) async {
+    await loadMeal(id:meal.id)
+  }
+  
+  @MainActor
   func loadList() async {
     do {
       recipes = try await getList()

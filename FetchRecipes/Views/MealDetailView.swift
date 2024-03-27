@@ -4,41 +4,51 @@ struct MealDetailView: View {
   let meal: Meal
 
   var body: some View {
-    List {
-      Section {
-        AsyncImage(url: meal.strMealThumb) { image in
-          image
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-        } placeholder: {
-          Color.gray.opacity(0.1)
+    NavigationStack {
+      List {
+        Section {
+          AsyncImage(url: meal.strMealThumb) { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+          } placeholder: {
+            Color.gray.opacity(0.1)
+          }
+          .frame(maxWidth: .infinity, minHeight: 300, maxHeight: 600)
+          .clipped()
+          .listRowInsets(EdgeInsets())
         }
-        .frame(maxWidth: .infinity, minHeight: 300, maxHeight: 600)
-        .clipped()
-        .listRowInsets(EdgeInsets())
-      }
-      if let ingredients = meal.ingredients {
-        Section("Ingredients") {
-          ForEach(ingredients.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-            HStack {
-              Text(value)
-              Text(key)
-              Spacer()
+        if !meal.ingredients.isEmpty {
+          let ingredients = meal.ingredients
+          Section("Ingredients") {
+            ForEach(ingredients.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+              HStack {
+                Text(value)
+                  .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                Text(key)
+                  .multilineTextAlignment(.leading)
+              }
             }
           }
         }
+        if let instructions = meal.strInstructions, !instructions.isEmpty {
+          Section("Instructions") {
+            Text(instructions)
+              .multilineTextAlignment(.leading)
+          }
+        }
       }
-
-      Section("Instructions") {
-        Text(meal.strInstructions ?? "")
-          .multilineTextAlignment(.leading)
-      }
+      .listStyle(GroupedListStyle())
+      .navigationTitle(meal.strMeal)
     }
-    .listStyle(GroupedListStyle())
   }
   
 }
 
 #Preview {
   MealDetailView(meal: .mock)
+}
+
+#Preview { //Missing Instructions
+  MealDetailView(meal: Meal(id: "555", strMeal: "Missing Instructions", strInstructions: nil, strMealThumb: Meal.mock.strMealThumb, ingredients: Meal.mock.ingredients))
 }
