@@ -22,13 +22,13 @@ struct MealDetailView: View {
           let ingredients = meal.ingredients
           Section("Ingredients") {
             ForEach(ingredients.indices, id: \.self) { index in
-                let item = ingredients[index]
-                HStack {
-                    Text(item.measurement)
-                        .multilineTextAlignment(.leading)
-                    Text(item.ingredient)
-                        .multilineTextAlignment(.leading)
-                }
+              let item = ingredients[index]
+              HStack {
+                Text(item.measurement)
+                  .multilineTextAlignment(.leading)
+                Text(item.ingredient)
+                  .multilineTextAlignment(.leading)
+              }
             }
           }
         }
