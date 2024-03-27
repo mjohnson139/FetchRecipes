@@ -12,7 +12,7 @@ enum ApiError: LocalizedError {
   }
 }
 
-struct ApiClient: Sendable {
+struct ApiClient {
   var getList: @Sendable () async throws -> [Meal]
   var getMealById: @Sendable (String) async throws -> Meal?
 }
