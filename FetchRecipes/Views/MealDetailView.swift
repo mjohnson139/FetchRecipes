@@ -17,23 +17,26 @@ struct MealDetailView: View {
         .clipped()
         .listRowInsets(EdgeInsets())
       }
-      Section("Ingredients") {
-        ForEach(meal.ingredients.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-          HStack {
-            Text(value)
-            Text(key)
-            Spacer()
+      if let ingredients = meal.ingredients {
+        Section("Ingredients") {
+          ForEach(ingredients.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+            HStack {
+              Text(value)
+              Text(key)
+              Spacer()
+            }
           }
         }
       }
 
       Section("Instructions") {
-        Text(meal.strInstructions)
+        Text(meal.strInstructions ?? "")
           .multilineTextAlignment(.leading)
       }
     }
     .listStyle(GroupedListStyle())
   }
+  
 }
 
 #Preview {

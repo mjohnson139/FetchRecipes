@@ -1,13 +1,16 @@
+import Dependencies
 import Foundation
 import SwiftUI
 import SwiftUINavigation
-import Dependencies
 
 final class RecipeListModel: ObservableObject {
   @Dependency(\.apiClient.getList) var getList
-  
+  @Dependency(\.apiClient.getMealById) var getMealById
+
   @Published var destination: Destination?
   @Published var recipes: [Meal]?
+  @Published var errorMessage: String?
+
   let listName: String
 
   enum Destination {
@@ -20,12 +23,26 @@ final class RecipeListModel: ObservableObject {
   }
 
   @MainActor
-  func loadData() async {
-      //Call the client and get the meal list.
-    self.recipes =  try! await getList()
+  func loadList() async {
+    do {
+      recipes = try await getList()
+    } catch {
+      recipes = []
+      errorMessage = error.localizedDescription
+    }
   }
-  
-  func mealTapped(meal: Meal) {
-    destination = .detail(meal)
+
+  @MainActor
+  func loadMeal(id: String) async {
+    do {
+      if let meal = try await getMealById(id) {
+        destination = .detail(meal)
+      }
+    } catch {
+      recipes = []
+      errorMessage = error.localizedDescription
+    }
   }
+
+
 }

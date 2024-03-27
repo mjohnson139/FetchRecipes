@@ -1,10 +1,21 @@
 import Dependencies
 import Foundation
-import XCTestDynamicOverlay
+
+enum ApiError: LocalizedError {
+  case dataLoadError
+  
+  /// A localized message describing what error occurred.
+  var errorDescription: String {
+    switch self {
+    case .dataLoadError:
+      return "Could not load the data."
+    }
+  }
+}
 
 struct ApiClient: Sendable {
   var getList: @Sendable () async throws -> [Meal]
-  var getMealById: @Sendable (String) async throws -> Meal
+  var getMealById: @Sendable (String) async throws -> Meal?
 }
 
 extension ApiClient {
@@ -21,17 +32,33 @@ extension ApiClient {
 
 extension ApiClient {
   static let live = Self.init {
+    let model = try await requestModel(url: URL(string: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert")!)
+    return model.meals
+
+  } getMealById: { id in
+    let model = try await requestModel(url: URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=\(id)")!)
+    return model.meals.first
+  }
+  
+  static func requestModel(url: URL) async throws -> Meals {
     // Return the list of desserts
-    fatalError()
-  } getMealById: { _ in
-    // Get a specific meal based on the id
-    fatalError()
+    let (data, response) = try await URLSession.shared.data(from: url)
+    guard let httpResponse = response as? HTTPURLResponse,
+          httpResponse.statusCode == 200
+    else {
+      throw(ApiError.dataLoadError)
+    }
+
+    let decoder = JSONDecoder()
+    print(String(data: data, encoding: .utf8) ?? "no data was found")
+    let model = try decoder.decode(Meals.self, from: data)
+    return model
   }
 }
 
 extension ApiClient: DependencyKey {
   static var liveValue: Self {
-    .mock
+    .live
   }
 
   static let previewValue = Self.mock

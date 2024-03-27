@@ -17,7 +17,9 @@ struct RecipeListView: View {
           LazyVGrid(columns: columns, spacing: 20) {
             ForEach(recipes) { meal in
               Button(action: {
-                model.mealTapped(meal: meal)
+                Task {
+                  await model.loadMeal(id:meal.id)
+                }
               }) {
                 MealCardView(meal: meal)
               }
@@ -45,7 +47,7 @@ struct RecipeListView: View {
       // Call the API to load data if not already loaded
       Task {
         if model.recipes == nil {
-          await model.loadData()
+          await model.loadList()
         }
       }
     }

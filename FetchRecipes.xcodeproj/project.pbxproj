@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55C0B7082BB2300D00741973 /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107822BB21ABB008A6345 /* MealCardView.swift */; };
-		55C0B7092BB2301100741973 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107842BB21B7E008A6345 /* MealDetailView.swift */; };
 		55C0B70B2BB332EE00741973 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C0B70A2BB332EE00741973 /* ApiClient.swift */; };
 		55C0B70E2BB33F7500741973 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 55C0B70D2BB33F7500741973 /* Dependencies */; };
 		55C0B7102BB33F7500741973 /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 55C0B70F2BB33F7500741973 /* DependenciesMacros */; };
@@ -18,12 +16,10 @@
 		55D951412BB1C1D40095321B /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951402BB1C1D40095321B /* RecipeListView.swift */; };
 		55D951432BB1C39C0095321B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951422BB1C39C0095321B /* Models.swift */; };
 		55D951452BB1CAA10095321B /* ModelsDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951442BB1CAA10095321B /* ModelsDecodingTests.swift */; };
-		55D951462BB1CB920095321B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951422BB1C39C0095321B /* Models.swift */; };
 		55D951482BB1E70C0095321B /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951472BB1E70C0095321B /* Mocks.swift */; };
-		55D951492BB1E7100095321B /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951472BB1E70C0095321B /* Mocks.swift */; };
 		55D9514B2BB208630095321B /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9514A2BB208630095321B /* ViewModels.swift */; };
-		55D9514C2BB208950095321B /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9514A2BB208630095321B /* ViewModels.swift */; };
-		55D9514D2BB208D20095321B /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D951402BB1C1D40095321B /* RecipeListView.swift */; };
+		55DC81582BB3687400FBFE6C /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 55DC81572BB3687400FBFE6C /* Dependencies */; };
+		55DC815B2BB3689D00FBFE6C /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 55DC815A2BB3689D00FBFE6C /* DependenciesMacros */; };
 		55F107802BB210AA008A6345 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 55F1077F2BB210AA008A6345 /* SwiftUINavigation */; };
 		55F107832BB21ABB008A6345 /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107822BB21ABB008A6345 /* MealCardView.swift */; };
 		55F107852BB21B7E008A6345 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F107842BB21B7E008A6345 /* MealDetailView.swift */; };
@@ -72,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DC815B2BB3689D00FBFE6C /* DependenciesMacros in Frameworks */,
+				55DC81582BB3687400FBFE6C /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +185,10 @@
 				55C8C8B52BADD21E00FE13FE /* PBXTargetDependency */,
 			);
 			name = FetchRecipesTests;
+			packageProductDependencies = (
+				55DC81572BB3687400FBFE6C /* Dependencies */,
+				55DC815A2BB3689D00FBFE6C /* DependenciesMacros */,
+			);
 			productName = FetchRecipesTests;
 			productReference = 55C8C8B32BADD21E00FE13FE /* FetchRecipesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -272,13 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55D951462BB1CB920095321B /* Models.swift in Sources */,
-				55C0B7082BB2300D00741973 /* MealCardView.swift in Sources */,
 				55D951452BB1CAA10095321B /* ModelsDecodingTests.swift in Sources */,
-				55D9514C2BB208950095321B /* ViewModels.swift in Sources */,
-				55C0B7092BB2301100741973 /* MealDetailView.swift in Sources */,
-				55D9514D2BB208D20095321B /* RecipeListView.swift in Sources */,
-				55D951492BB1E7100095321B /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +579,16 @@
 			productName = Dependencies;
 		};
 		55C0B70F2BB33F7500741973 /* DependenciesMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesMacros;
+		};
+		55DC81572BB3687400FBFE6C /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		55DC815A2BB3689D00FBFE6C /* DependenciesMacros */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55C0B70C2BB33F7500741973 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
 			productName = DependenciesMacros;

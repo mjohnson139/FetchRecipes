@@ -1,103 +1,61 @@
 // TestModels.swift
 
 import XCTest
+@testable import FetchRecipes
+import Foundation
 
 final class ModelsDecodingTests: XCTestCase {
   
-  
-  func testMealSimpleDecoding() {
-    // Sample JSON for testing
-    let json = """
-    {
-       "idMeal": "53049",
-       "strMeal": "Apam balik",
-       "strInstructions": "Mix milk, oil and egg together.",
-       "strMealThumb": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg",
-       "strIngredient1": "Milk",
-       "strMeasure1": "200ml",
-       "strIngredient2": "Oil",
-       "strMeasure2": "60ml",
-       "strIngredient3": "Eggs",
-       "strMeasure3": "2",
-       "strIngredient4": "Flour",
-       "strMeasure4": "1600g",
-       "strIngredient5": "Baking Powder",
-       "strMeasure5": "3 tsp",
-       "strIngredient6": "Salt",
-       "strMeasure6": "1/2 tsp",
-       "strIngredient7": "Unsalted Butter",
-       "strMeasure7": "25g",
-       "strIngredient8": "Sugar",
-       "strMeasure8": "45g",
-       "strIngredient9": "Peanut Butter",
-       "strMeasure9": "3 tbs"
-    }
-    """.data(using: .utf8)!
+  struct Meals: Decodable {
+    let meals: [Meal]
+  }
 
-    // Attempt to decode the JSON into a Meal object
-    let decoder = JSONDecoder()
-    do {
-      let meal = try decoder.decode(Meal.self, from: json)
-      XCTAssertEqual(meal.id, "53049")
-      XCTAssertEqual(meal.strMeal, "Apam balik")
-      XCTAssertEqual(meal.strInstructions.contains("Mix milk, oil and egg together"), true)
-      XCTAssertEqual(meal.ingredients.count, 9) // Adjust based on the actual number of ingredients
-      XCTAssertEqual(meal.ingredients["Milk"], "200ml")
-      XCTAssertEqual(meal.ingredients["Oil"], "60ml")
-      // Add more assertions for other ingredients and measurements
-    } catch let decodingError as DecodingError {
-      print("Decoding error", decodingError.localizedDescription)
-      XCTFail("Decoding failed: \(decodingError)")
-    } catch {
-      XCTFail("Decoding failed: \(error)")
+  struct Meal: Equatable, Identifiable, Decodable {
+    let id: String
+    let strMeal: String
+    let strMealThumb: URL
+    let strInstructions: String?
+    let ingredients: [String : String]?
+    
+    
+    private enum CodingKeys: String, CodingKey {
+      case id = "idMeal"
+      case strMeal
+      case strMealThumb
+      case strInstructions
+      case ingredients
     }
   }
-  func testMealFailingDecoding() {
-    // Sample JSON for testing
-    let json = """
+  
+  
+  func testReadList() async throws {
+    let (data, response) = try await URLSession.shared.data(from: URL(string: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert")!)
+    if let httpResponse = response as? HTTPURLResponse,
+       httpResponse.statusCode == 200
     {
-       "idMeal": "53049",
-       "strMeal": "Apam balik",
-       "strInstructions": "Mix milk, oil and egg together. Sift flour, baking powder and salt into the mixture. Stir well until all ingredients are combined evenly.\r\n\r\nSpread some batter onto the pan. Spread a thin layer of batter to the side of the pan. Cover the pan for 30-60 seconds until small air bubbles appear.\r\n\r\nAdd butter, cream corn, crushed peanuts and sugar onto the pancake. Fold the pancake into half once the bottom surface is browned.\r\n\r\nCut into wedges and best eaten when it is warm.",
-       "strMealThumb": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg",
-       "strIngredient1": "Milk",
-       "strMeasure1": "200ml",
-       "strIngredient2": "Oil",
-       "strMeasure2": "60ml",
-       "strIngredient3": "Eggs",
-       "strMeasure3": "2",
-       "strIngredient4": "Flour",
-       "strMeasure4": "1600g",
-       "strIngredient5": "Baking Powder",
-       "strMeasure5": "3 tsp",
-       "strIngredient6": "Salt",
-       "strMeasure6": "1/2 tsp",
-       "strIngredient7": "Unsalted Butter",
-       "strMeasure7": "25g",
-       "strIngredient8": "Sugar",
-       "strMeasure8": "45g",
-       "strIngredient9": "Peanut Butter",
-       "strMeasure9": "3 tbs"
-    }
-    """.data(using: .utf8)!
+      let decoder = JSONDecoder()
 
-    // Attempt to decode the JSON into a Meal object
-    let decoder = JSONDecoder()
-    do {
-      let meal = try decoder.decode(Meal.self, from: json)
-      XCTAssertEqual(meal.id, "53049")
-      XCTAssertEqual(meal.strMeal, "Apam balik")
-      XCTAssertEqual(meal.strInstructions.contains("Mix milk, oil and egg together"), true)
-      XCTAssertEqual(meal.ingredients.count, 9) // Adjust based on the actual number of ingredients
-      XCTAssertEqual(meal.ingredients["Milk"], "200ml")
-      XCTAssertEqual(meal.ingredients["Oil"], "60ml")
-      // Add more assertions for other ingredients and measurements
-    } catch let decodingError as DecodingError {
-      print("Decoding error", decodingError.localizedDescription)
-      XCTFail("Decoding failed: \(decodingError)")
-    } catch {
-      XCTFail("Decoding failed: \(error)")
+      let dictionary = try decoder.decode(Meals.self, from: data)
+      print("Dictionary", dictionary)
     }
+
+  }
+  
+  func testReadItem() async throws {
+    
+    
+
+    
+    let (data, response) = try await URLSession.shared.data(from: URL(string: "https://themealdb.com/api/json/v1/1/lookup.php?i=53049")!)
+    if let httpResponse = response as? HTTPURLResponse,
+       httpResponse.statusCode == 200
+    {
+      let decoder = JSONDecoder()
+      let meals = try decoder.decode(Meals.self, from: data)
+      print("meals", meals)
+
+    }
+
   }
   
 
