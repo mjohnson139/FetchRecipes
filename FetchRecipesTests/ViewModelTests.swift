@@ -31,6 +31,6 @@ final class ViewModelTests: XCTestCase {
     await model.loadList()
 
     XCTAssertEqual([], model.recipes)
-    XCTAssertEqual(ApiError.dataLoadError.localizedDescription, model.errorMessage)
+    XCTAssertEqual(ApiError.invalidResponse.localizedDescription, model.errorMessage)
   }
 }

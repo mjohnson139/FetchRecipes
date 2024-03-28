@@ -41,9 +41,9 @@ import Foundation
     }
 
     static let mockFailing = Self.init {
-      throw ApiError.dataLoadError
+      throw ApiError.invalidResponse
     } getMealById: { _ in
-      throw ApiError.dataLoadError
+      throw ApiError.invalidResponse
     }
   }
 #endif
